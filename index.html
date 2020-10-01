@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagar</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .container{
+            
+            display: flex;
+            align-items: stretch;
+            height: 100vh;
+            width: 100%;
+        }
+        .inner-container{
+            -webkit-box-shadow: 0px 0px 14px -6px #000000; 
+            box-shadow: 0px 0px 14px -6px #000000;
+            background: rgb(243, 243, 243);
+            flex-grow: 1;
+            margin: 100px 200px;
+            
+        }
+        .title{
+            margin-bottom: 10px;
+        }
+        .divider{
+            height: 8px;
+            background-color: rgb(10, 82, 189);
+            width: 500px;
+        }
+        .header{
+            display: flex;
+            flex-direction: column;
+            margin: 20px 0 0 20px;
+        }
+        .info{
+            display: flex;
+            flex-direction: row;
+            align-content: stretch;
+            margin: 20px 20px;
+        }
+        .col{
+            height: 100%;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .info-pago{
+            display: flex;
+            flex-direction: row;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .info-pago > :first-child {
+            color: rgb(10, 82, 189);
+            margin-right: 5px;
+        }
+        .payment-form h3{
+            margin: 0 0 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="inner-container">
+            <div class="header">
+                <h1 class="title">Pagar ahora</h1>
+                <div class="divider"></div>
+            </div>
+            <div class="info">
+                <div class="col">
+                    <div class="info-pago">
+                        <p>Concepto de pago:</p>
+                        <p>REALIZACION DE EVENTO DE SUBASTA</p>
+                    </div>
+                    <div class="info-pago">
+                        <p>Tipo de bien:</p>
+                        <p>CASA</p>
+                    </div>
+                    <div class="info-pago">
+                        <p>ID del evento:</p>
+                        <p>MXN77472374892901</p>
+                    </div>
+                    <div class="info-pago">
+                        <p>Importe a pagar:</p>
+                        <p>$15 MXN</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="info-pago">
+                        <p>Fecha de adjudicación:</p>
+                        <p id="fecha"></p>
+                    </div>
+                    <div class="info-pago">
+                        <p>Hora de adjudicación:</p>
+                        <p id="hora"></p>
+                    </div>
+                    <div class="info-pago">
+                        <p>Huso horario deseado:</p>
+                        <p id="timezone"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="payment-form">
+                <h3>Seleccione un método de pago</h3>
+            </div>
+        </div>
+    </div>
+    <script>
+        time =  new Date();
+        document.getElementById("fecha").innerHTML = time.getDate() + "-" + ("0" + (time.getMonth() + 1)).slice(-2) + "-" + time.getFullYear();
+        document.getElementById("hora").innerHTML = time.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })
+        document.getElementById("timezone").innerHTML = Intl.DateTimeFormat().resolvedOptions().timeZone
+    </script>
+</body>
+</html>
