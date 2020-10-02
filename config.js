@@ -5,5 +5,6 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = {
     PORT: process.env.PORT || 3000,
     OPENPAY_PRIVATE_KEY: process.env.OPENPAY_PRIVATE_KEY,
-    OPENPAY_MERCHANT_ID: process.env.OPENPAY_MERCHANT_ID
+    OPENPAY_MERCHANT_ID: process.env.OPENPAY_MERCHANT_ID,
+    BASE_URL: process.env.BASE_URL
 }
