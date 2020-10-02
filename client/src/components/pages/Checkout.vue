@@ -10,6 +10,7 @@
       <p>{{ id }}</p>
       <p>{{ response }}</p>
     </div>
+    
   </div>
 </template>
 
