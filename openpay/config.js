@@ -9,6 +9,7 @@ OPENPAY.setTimeout(20000); // in ms (default is 90000ms)
 OPENPAY.setMerchantId(OPENPAY_MERCHANT_ID);
 OPENPAY.setPrivateKey(OPENPAY_PRIVATE_KEY);
 OPENPAY.setProductionReady(false);
+//OPENPAY.setSandboxMode(true);
 
 //use the api
 
