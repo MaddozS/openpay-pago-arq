@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="inner-container">
-      <div>
+      <div class="wrapper">
         <infoPago v-for="(val, key) in informacionPago" :key="key" :concepto="key" :infoConcepto="val"/>
       </div>
     </div>
@@ -46,4 +46,10 @@ export default {
   flex-grow: 1;
   margin: 100px 200px;
 }
+.wrapper {
+  display: grid;
+  grid-template-columns: 50% 49%;
+  grid-gap: 1%;
+}
+
 </style>
