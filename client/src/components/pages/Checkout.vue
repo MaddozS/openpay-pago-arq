@@ -17,7 +17,12 @@ export default {
     return {
       informacionPago: {
         'Concepto de pago':'REALIZACION DE EVENTO DE SUBASTA', 
-        'Tipo de bien':'CASA'
+        'Tipo de bien':'Casa', 
+        'ID del evento': 'MXN01934659',
+        'Importe del servicio': '$20',
+        'Fecha de adjudicacion': '2020-10-1',
+        'Hora de adjudicacion': 'Ahorita',
+        'Huso-horario deseado': 'El de mi casa'
       }
     }
   },
