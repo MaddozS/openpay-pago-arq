@@ -5,6 +5,7 @@
         <infoPago v-for="(val, key) in informacionPago" :key="key" :concepto="key" :infoConcepto="val"/>
       </div>
     </div>
+    
   </div>
 </template>
 
