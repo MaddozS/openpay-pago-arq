@@ -22,9 +22,13 @@ router.get('/create_user', async (req, res) => {
             "country_code":"MX" 
         }
     })
-    console.log(user)
-    const openpayRespond = await user.getId()
-    res.status(200).json(openpayRespond)
+    try {
+        const openpayRespond = await user.getId()
+        res.status(200).json(openpayRespond)
+    } 
+    catch (e) {
+        res.status(e.message.http_code).json(e.message)
+    }
 })
 
 module.exports = router
