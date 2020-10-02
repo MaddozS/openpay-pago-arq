@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div class="inner-container">
+      <h1 class="title">Pagar Ahora</h1>
       <div class="wrapper">
         <infoPago v-for="(val, key) in informacionPago" :key="key" :concepto="key" :infoConcepto="val"/>
       </div>
@@ -48,8 +49,13 @@ export default {
 }
 .wrapper {
   display: grid;
-  grid-template-columns: 50% 49%;
-  grid-gap: 1%;
+  grid-template-columns: 44% 48%;
+  padding-left: 3%;
+  grid-gap: 3%;
+}
+.title{
+  padding-bottom: 30px;
+  padding-left: 50px;
 }
 
 </style>
