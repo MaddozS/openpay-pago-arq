@@ -5,9 +5,10 @@
       <div class="wrapper">
         <infoPago v-for="(val, key) in informacionPago" :key="key" :concepto="key" :infoConcepto="val"/>
       </div>
-      <form action="" method="get" id='formCard'>
-
-      </form>
+      <div class="form-container">
+        <FormCard/>
+      </div>
+      
       <p>{{ id }}</p>
       <p>{{ response }}</p>
     </div>
@@ -18,6 +19,7 @@
 <script>
 import axios from 'axios'
 import infoPago from '../atoms/infoPago'
+import FormCard from '../molecules/FormCard'
 
 export default {
   name: 'prueba',
@@ -31,7 +33,9 @@ export default {
         'Fecha de adjudicacion': '2020-10-1',
         'Hora de adjudicacion': 'Ahorita',
         'Huso-horario deseado': 'El de mi casa'
-      }
+      },
+      id: 'NO IDE',
+      response: 'no response'
     }
   },
   mounted(){
@@ -58,7 +62,7 @@ export default {
     })
   },
   components: {
-    infoPago
+    infoPago, FormCard
   }
 }
 </script>
@@ -75,18 +79,22 @@ export default {
   box-shadow: 0px 0px 14px -6px #000000;
   background: rgb(243, 243, 243);
   flex-grow: 1;
-  margin: 100px 200px;
+  margin: 100px 300px;
 }
 .wrapper {
   display: grid;
-  grid-template-columns: 44% 48%;
-  padding-left: 3%;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 3%;
+  margin-left: 50px;
 }
 .title{
-  padding-bottom: 30px;
-  padding-left: 50px;
-  padding-top: 20px;
+  margin-bottom: 30px;
+  margin-left: 50px;
+  margin-top: 20px;
+}
+.form-container{
+  display: flex;
+  justify-content: center;
 }
 
 </style>
