@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <div class="inner-container">
-      <div>
+      <h1 class="title">Pagar Ahora</h1>
+      <div class="wrapper">
         <infoPago v-for="(val, key) in informacionPago" :key="key" :concepto="key" :infoConcepto="val"/>
       </div>
       <form action="" method="get" id='formCard'>
@@ -23,10 +24,13 @@ export default {
     return {
       informacionPago: {
         'Concepto de pago':'REALIZACION DE EVENTO DE SUBASTA', 
-        'Tipo de bien':'CASA'
-      },
-      id: 'NO ID',
-      response: ''
+        'Tipo de bien':'Casa', 
+        'ID del evento': 'MXN01934659',
+        'Importe del servicio': '$20',
+        'Fecha de adjudicacion': '2020-10-1',
+        'Hora de adjudicacion': 'Ahorita',
+        'Huso-horario deseado': 'El de mi casa'
+      }
     }
   },
   mounted(){
@@ -72,4 +76,16 @@ export default {
   flex-grow: 1;
   margin: 100px 200px;
 }
+.wrapper {
+  display: grid;
+  grid-template-columns: 44% 48%;
+  padding-left: 3%;
+  grid-gap: 3%;
+}
+.title{
+  padding-bottom: 30px;
+  padding-left: 50px;
+  padding-top: 20px;
+}
+
 </style>
