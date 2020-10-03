@@ -3,29 +3,29 @@
     <form id="formCard">
       <div class="form">
         <div>
-          <p>Nombre del tarjetahabiente: {{ Titular }}</p>
-          <input v-model="Titular" placeholder="">
+          <p>Nombre del tarjetahabiente</p>
+          <input  placeholder="">
         </div>
         
 
         <div class="inputDate">
-          <p>Fecha de expiracion (MM/AAAA): {{ Fecha }} {{ Año }}</p>
-          <input v-model="Fecha" placeholder="MM" maxlength="2" minlength="1"><span>/</span><input v-model="Año" placeholder="AAAA" maxlength="2" minlength="4">
+          <p>Fecha de expiracion (MM/AAAA)</p>
+          <input placeholder="MM" maxlength="2" minlength="1"><span>/</span><input placeholder="AAAA" maxlength="4" minlength="2">
         </div>
         
         <div>
-          <p>Número Telefónico: {{ Telefono }}</p>
-          <input v-model="Telefono" placeholder="Lada (+52)">
+          <p>Número Telefónico:</p>
+          <input placeholder="Lada (+52)">
         </div>
         
         <div>
-          <p>Número de tarjeta de crédito: {{ NumTarjeta }}</p>
-          <input v-model="NumTarjeta" placeholder="xxxx xxxx xxxx xxxx" maxlength="16" minlength="16">  
+          <p>Número de tarjeta de crédito</p>
+          <input placeholder="xxxx xxxx xxxx xxxx" maxlength="16" minlength="16">  
         </div>  
 
         <div class="cvv2">
-          <p>CVC: {{ CVC }}</p>
-          <input v-model="CVC" placeholder="xxx" maxlength="3" minlength="3">
+          <p>CVV2</p>
+          <input placeholder="xxx" maxlength="3" minlength="3">
         </div>
 
       </div>
