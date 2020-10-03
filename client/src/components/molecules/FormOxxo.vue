@@ -1,8 +1,8 @@
 <template>
   <div>
       <div class="inputForm">
-        <p>Número Telefónico: {{ Telefono }}</p>
-        <input v-model="Telefono" placeholder="Lada (+52)">
+        <p>Número Telefónico</p>
+        <input placeholder="Lada (+52)">
       </div>
     </div>
 </template>
@@ -13,7 +13,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .inputForm input{
     margin: 10px 5px;
 }
