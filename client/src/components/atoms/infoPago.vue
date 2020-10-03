@@ -21,7 +21,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .info-pago{
     display: flex;
     flex-direction: row;
