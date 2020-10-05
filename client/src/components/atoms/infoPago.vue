@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'infoPago',
+  name: 'InfoPago',
   props: {
     concepto: {
       type: String,

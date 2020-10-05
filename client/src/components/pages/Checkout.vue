@@ -2,15 +2,8 @@
   <div class="container">
     <div class="inner-container">
       <h1 class="title">Pagar Ahora</h1>
-      <div class="wrapper">
-        <infoPago v-for="(val, key) in informacionPago" :key="key" :concepto="key" :infoConcepto="val"/>
-      </div>
-      <div class="form-container">
-        <FormCard/>
-      </div>
-      
-      <p>{{ id }}</p>
-      <p>{{ response }}</p>
+
+      <FormCheckout :informacionPago="informacionPago" @action-pay="pay"/>
     </div>
     
   </div>
@@ -18,11 +11,10 @@
 
 <script>
 import axios from 'axios'
-import infoPago from '../atoms/infoPago'
-import FormCard from '../molecules/FormCard'
+import FormCheckout from '../organisms/FormCheckout'
 
 export default {
-  name: 'prueba',
+  name: 'Checkout',
   data() {
     return {
       informacionPago: {
@@ -35,34 +27,50 @@ export default {
         'Huso-horario deseado': 'El de mi casa'
       },
       id: 'NO IDE',
-      response: 'no response'
+      response: 'no response',
+      selectedForm: 'card',
+      user: undefined
     }
   },
-  mounted(){
-    // const plugin = document.createElement("script");
-    // plugin.setAttribute(
-    //   "src",
-    //   "https://resources.openpay.mx/lib/openpay-data-js/1.2.38/openpay-data.v1.min.js"
-    // );
+  methods: {
+    async create_user() {
+      let response = await axios.post('api/user/create', {
+        device_session_id: this.id
+      })
+      // axios.post('api/payment/card/create', {
+      //   device_session_id: this.id
+      // })
+      // .then(res => {
+      //   this.response = res.data
+      // })
+      // .catch(error => {
+      //   console.log('aaa')
+      //   console.log(error)
+      //   this.response = error.data
+      // })
+
+      return response.data.message
+    },
+    create_card(){},
+    pay(selectedForm){
+      if(selectedForm === 'oxxo'){
+        alert("HOLA MUNDO")
+      }
+      else{
+        alert("HOLA MUNDO x2")
+      }
+    }
+  },
+  async mounted(){
+    let userRes = await this.create_user()
+    this.user = userRes
+    console.log(this.user)
+
     let deviceSessionId = window.OpenPay.deviceData.setup("formCard", "deviceIdHiddenFieldName");
-    //console.log(deviceSessionId)
     this.id = deviceSessionId;
-
-
-    axios.post('api/payment/create_card/', {
-      device_session_id: this.id
-    })
-    .then(res => {
-      this.response = res.data
-    })
-    .catch(error => {
-      console.log('aaa')
-      console.log(error)
-      this.response = error.data
-    })
   },
   components: {
-    infoPago, FormCard
+    FormCheckout
   }
 }
 </script>
@@ -70,31 +78,22 @@ export default {
 <style scoped>
 .container{
   display: flex;
-  align-items: stretch;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
-  width: 100%;
+  max-width: 100%;
+  padding: 0 20em;
 }
 .inner-container{
   -webkit-box-shadow: 0px 0px 14px -6px #000000; 
   box-shadow: 0px 0px 14px -6px #000000;
   background: rgb(243, 243, 243);
   flex-grow: 1;
-  margin: 100px 300px;
-}
-.wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 3%;
-  margin-left: 50px;
 }
 .title{
   margin-bottom: 30px;
   margin-left: 50px;
   margin-top: 20px;
-}
-.form-container{
-  display: flex;
-  justify-content: center;
 }
 
 </style>
