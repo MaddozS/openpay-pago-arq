@@ -2,18 +2,14 @@
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <Checkout />
+    <router-view />
   </div>
 </template>
 
 <script>
-import Checkout from './components/pages/Checkout'
 
 export default {
   name: 'App',
-  components: {
-    Checkout
-  }
 }
 </script>
 

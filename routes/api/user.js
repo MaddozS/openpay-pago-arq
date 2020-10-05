@@ -1,5 +1,4 @@
 const { Router } = require('express')
-const { OPENPAY } = require('../../openpay/config')
 const { createUser } = require('../../openpay/User')
 
 const router = Router()

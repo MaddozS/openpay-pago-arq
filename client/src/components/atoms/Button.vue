@@ -1,5 +1,8 @@
 <template>
-  <button @click="actionButton" class="button">
+  <button 
+    class="button" 
+    :type="typeButton"
+    :form="form">
     {{ text }}
   </button>
 </template>
@@ -11,13 +14,15 @@ export default {
     text: {
       type: String,
       required: true,
-    }
+    },
+    typeButton: String,
+    form: String,
   },
-  methods:{
-    actionButton(){
-      this.$emit('button-clicked')
-    }
-  }
+  // methods:{
+  //   actionButton(){
+  //     this.$emit('button-clicked')
+  //   }
+  // }
 }
 </script>
 

@@ -5,6 +5,9 @@
     :id="nameInput" 
     :maxlength="maxlength"
     :minlength="minlength"
+    :value="value"
+    :type="type"
+    @input="$emit('input', $event.target.value)"
     class="input">
 </template>
 
@@ -19,6 +22,8 @@ export default {
     placeholder: String,
     maxlength: Number,
     minlength: Number,
+    value: String,
+    type: String,
   }
 }
 </script>

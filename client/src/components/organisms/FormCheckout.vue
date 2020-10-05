@@ -8,13 +8,11 @@
 
     <div class="form-container" >
       <transition name="fade" mode="out-in">
-        <FormCard v-if="selectedForm === 'card' "/>
-        <OxxoForm v-else/>
+        <FormCard v-if="selectedForm === 'card' " :userId="userId" @send-form="action"/>
+        <OxxoForm v-else @send-form="action"/>
       </transition>
 
-      <div class="button-container">
-        <Button text="Hacer pago" @button-clicked="action"/>
-      </div>
+
     </div>
   </section>
 </template>
@@ -24,7 +22,6 @@ import InfoPago from '../atoms/InfoPago'
 import FormCard from '../molecules/FormCard'
 import OxxoForm from '../molecules/FormOxxo'
 import SelectorForm from '../molecules/SelectorForm'
-import Button from '../atoms/Button'
 
 export default {
   name:'FormCheckout',
@@ -33,10 +30,13 @@ export default {
       required: true,
       type: Object,
     },
+    endpointCard: String,
+    userId: String,
   },
   data() {
     return {
-      selectedForm: 'card'
+      selectedForm: 'card',
+      formData: {}
     }
   },
   methods: {
@@ -46,10 +46,10 @@ export default {
     },
     action(){
       this.$emit('action-pay', this.selectedForm)
-    }
+    },
   },
   components: {
-    InfoPago, FormCard, SelectorForm, OxxoForm, Button
+    InfoPago, FormCard, SelectorForm, OxxoForm
   }
 }
 </script>
@@ -75,9 +75,5 @@ export default {
   grid-gap: 3%;
   margin-left: 50px;
 }
-.button-container{
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-}
+
 </style>
