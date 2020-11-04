@@ -41,6 +41,7 @@ export default {
   },
   methods: {
     async create_user() {
+      // Se manda la información del usuario al endpoint de crear usuario
       try{
         let response = await axios.post('api/user/create', {
           device_session_id: this.sessionId
@@ -55,75 +56,19 @@ export default {
       
     },
     async create_card(){
-      // let payload = {
-      //   ...this.getCardData(), 
-      //   session_id: this.sessionId,
-      //   userId: this.userId
-      // }
-
-      // try{
-      //   let response = await axios.post('api/card/create', payload)
-      //   return response.data.message
-      // }
-      // catch(e){
-      //   console.error('[error] No se pudo crear el usuario',)
-      //   console.log(e.response.data)
-      // }
-
-      let card = this.getCardData()
-
-      return new Promise((resolve, reject) =>{
-        window.OpenPay.token.create({
-          'card_number':card.creditCard,
-          'holder_name':card.name,
-          'expiration_year':card.year,
-          'expiration_month':card.month,
-          'cvv2':card.cvv,
-        }, 
-        (response) => {
-          console.log(response)
-          resolve(response)
-        }, 
-        (e) => {
-          console.error('[error] No se pudo generar el token',)
-          reject(e)
-        })
-      })
+      // se manda la informacion de la tarjeta al endpoint de crear tarjeta
+      try{
+        let response = await axios.post('api/card/create', this.getCardData())
+        return response.data.id
+      }
+      catch(e){
+        console.error('[error] No se pudo crear el token de la tarjeta',)
+        console.log(e)
+      }
     },
+    // getters y setters para la información con la store de Vue
     getCardData(){
       return this.$store.getters.getFormData
-    },
-    async pay(selectedForm){
-      if(selectedForm === 'card'){
-        this.loading = true
-        // this.$router.push({name: 'Success'})
-        console.log('Creando token de tarjeta...')
-
-        let res = await this.create_card().catch(error => {
-          console.log(error)
-          this.$router.push({name: 'Error'})
-        })
-
-        this.setPaymentMethodToken(res.data.id)
-        console.log('Realizando cargo...')
-
-        await this.charge().catch(error => {
-          console.log(error)
-          this.$router.push({name: 'Error'})
-        })
-        this.loading = false
-        this.$router.push({name: 'Success'})
-      }
-      else{
-        let formData = this.getCardData()
-        if (formData.phone !== ''){
-          this.$router.push({name: 'SuccessOxxo'})
-        }
-        else{
-          this.$router.push({name: 'Error'})
-        }
-        
-      }
     },
     setUserId(id) {
       this.$store.dispatch('setUserId', id)
@@ -134,7 +79,52 @@ export default {
     getPaymentMethodToken() {
       return this.$store.getters.getPaymentMethodToken
     },
-    async charge(){
+    //final de getters y setters
+
+    // realizar cargo
+    async pay(selectedForm){
+      // Pago en caso de ser el metodo de pago con tarjeta
+      if(selectedForm === 'card'){
+        // Mostramos la pantalla de carga
+        this.loading = true
+
+        // Creamos el token de la tarjeta
+        console.log('Creando token de tarjeta...')
+        let res = await this.create_card().catch(error => {
+          console.log(error)
+          this.$router.push( { name: 'Error' } )
+        })
+
+        // Ponemos el token de la tarjeta en la store de Vue
+        this.setPaymentMethodToken(res)
+        
+        // Mandamos la información para hacer el cargo
+        console.log('Realizando cargo...')
+        await this.charge().catch(error => {
+          console.log(error)
+          this.$router.push({name: 'Error'})
+        })
+
+        // quitamos la pantalla de carga
+        this.loading = false
+
+        //nos movemos a la pantalla de pago exitoso
+        this.$router.push({name: 'Success'})
+
+      }
+      // pago en caso de se pago en oxxo
+      else{
+        let formData = this.getCardData()
+        if (formData.phone !== ''){
+          this.$router.push({name: 'SuccessOxxo'})
+        }
+        else{
+          this.$router.push({name: 'Error'})
+        }
+      }
+    },
+    // Método que realizar el cargo al API
+    async charge() {
       let payload = {
         token: this.getPaymentMethodToken(),
         reason: this.informacionPago['Concepto de pago'],
@@ -143,23 +133,20 @@ export default {
         user: this.user,
         amount: 15
       }
-      console.log(payload)
-      let response = await axios.post('api/payment/charge', payload)
-      
-      console.log(response)
-
+      await axios.post('api/payment/charge', payload)
     }
   },
-  async mounted(){
+  async mounted() {
+    // Obtenemos el session ID
     let deviceSessionId = window.OpenPay.deviceData.setup("formCard", "deviceIdHiddenFieldName");
     this.sessionId = deviceSessionId;
+    // Lo ponemos en la store de Vue
     this.$store.dispatch('setSessionId', this.sessionId)
 
+    // Creamos el usuario
     let userRes = await this.create_user()
-    //console.log(userRes.id)
-    this.user = userRes
+    this.user = userRes 
     this.userId = userRes.id
-    console.log(this.user)
     this.setUserId(this.userId)
   },
   components: {

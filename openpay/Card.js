@@ -1,31 +1,35 @@
-const { OPENPAY } = require('./config')
+const { OPENPAY_MERCHANT_ID, OPENPAY_PRIVATE_KEY } = require('../config')
+const axios = require('axios')
 
 const createCard = ( { card_number, holder_name, expiration_year, 
-    expiration_month, cvv2, device_session_id } ) => ({
+    expiration_month, cvv2 } ) => ({
     fields: {
         card_number,
         holder_name,
         expiration_year,
         expiration_month,
         cvv2,
-        device_session_id
     },
-    getId: async function(clientId) {
+    getId: async function() {
 
-        return new Promise((resolve, reject) =>{
-            OPENPAY.customers.cards.create(clientId, this.fields, (error, body) => {
-                if(error){
-                    // console.log({'status':'error', 'message': error})
-                    reject({'status':'error', 'message': error})
-                }
-                else{
-                    // console.log({'status':'OK', 'message': body})
-                    resolve({'status':'OK', 'message': body})
-                }
-                //error;    // null if no error occurred (status code != 200||201||204)
-                //body;     // contains the object returned if no error occurred (status code == 200||201||204)
-            });
-        })
+        try{
+            let response = await axios.post(`https://sandbox-api.openpay.mx/v1/${OPENPAY_MERCHANT_ID}/tokens`, 
+                this.fields, {
+                    auth: {
+                        username: `${OPENPAY_PRIVATE_KEY}`,
+                        password: ''
+                    }
+                })
+            
+            return response
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+        
+
+        
     }
 })
 

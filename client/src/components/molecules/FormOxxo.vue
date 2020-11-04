@@ -26,7 +26,7 @@ export default {
     },
     methods: {
       setFormData() { 
-        this.$store.dispatch('setFormData', { phone: this.phone})
+        this.$store.dispatch('setFormData', { phone: this.phone })
         this.$emit('send-form')
       },
     },

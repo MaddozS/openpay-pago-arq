@@ -8,6 +8,7 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/create', async (req, res) => {
+
   const user = createUser({
       'name': 'Axel',
       'last_name': 'Anaya',
@@ -22,6 +23,7 @@ router.post('/create', async (req, res) => {
           "country_code":"MX" 
       }
   })
+
   try {
       const openpayRespond = await user.getId()
       res.status(200).json(openpayRespond)
