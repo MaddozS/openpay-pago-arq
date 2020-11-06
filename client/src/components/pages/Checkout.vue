@@ -127,14 +127,13 @@ export default {
     // Método que realizar el cargo al API
     async charge() {
       let payload = {
-        token: '',
+        token: this.getPaymentMethodToken(),
         reason: this.informacionPago['Concepto de pago'],
         session_id: this.sessionId,
         userId: this.userId,
         user: this.user,
         amount: 15
       }
-
       await axios.post('api/payment/charge', payload)
     }
   },
