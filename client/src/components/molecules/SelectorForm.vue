@@ -49,9 +49,10 @@ h3{
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+  color:#f7f7f7;
 }
 .option{
-	border: 2px solid rgb(190, 190, 190);
+	border: 2px solid #1E1E29;
 	border-radius: 20px;
 	width: 17em;
 	padding: 10px;
