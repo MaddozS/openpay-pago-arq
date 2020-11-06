@@ -160,20 +160,22 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   max-width: 100%;
   padding: 0 20em;
+  background-color: #1E1E29;
 }
 .inner-container{
   -webkit-box-shadow: 0px 0px 14px -6px #000000; 
   box-shadow: 0px 0px 14px -6px #000000;
-  background: rgb(243, 243, 243);
+  background: #2D2D3C;
   flex-grow: 1;
+  color: #f7f7f7;
 }
 .title{
   margin-bottom: 30px;
   margin-left: 50px;
   margin-top: 20px;
+  color: #f7f7f7; 
 }
 
 </style>

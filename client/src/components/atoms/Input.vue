@@ -33,12 +33,13 @@ export default {
   margin-top: 5px;
   font-family: "Roboto", sans-serif;
   outline: 0;
-  background: #ffffff;
   border-radius: 6px;
-  border: 2px solid rgb(228, 228, 228);
   padding: 8px;
   box-sizing: border-box;
   font-size: 14px;
   width: 100%;
+  border: 1px solid #3B3B4F;
+  background: #3B3B4F;
+  color: #f7f7f7;
 }
 </style>

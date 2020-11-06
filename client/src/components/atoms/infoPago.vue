@@ -1,7 +1,7 @@
 <template>
   <div class="info-pago">
     <p>{{ concepto }}: </p>
-    <p>{{ infoConcepto }}</p>
+    <p class="info-concepto ">{{ infoConcepto }}</p>
   </div>
 </template>
 
@@ -31,5 +31,8 @@ export default {
 .info-pago > :first-child {
     color: rgb(10, 82, 189);
     margin-right: 5px;
+}
+.info-pago .info-concepto {
+  color: #f7f7f7;
 }
 </style>
