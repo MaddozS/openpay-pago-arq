@@ -100,16 +100,17 @@ export default {
         
         // Mandamos la información para hacer el cargo
         console.log('Realizando cargo...')
-        await this.charge().catch(error => {
+        await this.charge().then(() => {
+          // quitamos la pantalla de carga
+          this.loading = false
+
+          //nos movemos a la pantalla de pago exitoso
+          this.$router.push({name: 'Success'})
+
+        }).catch(error => {
           console.log(error)
           this.$router.push({name: 'Error'})
         })
-
-        // quitamos la pantalla de carga
-        this.loading = false
-
-        //nos movemos a la pantalla de pago exitoso
-        this.$router.push({name: 'Success'})
 
       }
       // pago en caso de se pago en oxxo
@@ -126,13 +127,14 @@ export default {
     // Método que realizar el cargo al API
     async charge() {
       let payload = {
-        token: this.getPaymentMethodToken(),
+        token: '',
         reason: this.informacionPago['Concepto de pago'],
         session_id: this.sessionId,
         userId: this.userId,
         user: this.user,
         amount: 15
       }
+
       await axios.post('api/payment/charge', payload)
     }
   },
