@@ -2,7 +2,10 @@
   <div class="container">
     <Loading v-if="loading" />
     <div class="inner-container">
-      <h1 class="title">Pagar Ahora</h1>      
+      <styled-wrapper>
+        <h1 class="title">Pagar Ahora</h1>     
+      </styled-wrapper> 
+
       <FormCheckout 
         :informacionPago="informacionPago" 
         @action-pay="pay" 
@@ -17,6 +20,7 @@
 import axios from 'axios'
 import FormCheckout from '../organisms/FormCheckout'
 import Loading from '../atoms/Loading'
+import Styles from '../Styles'
 
 export default {
   name: 'Checkout',
@@ -150,7 +154,8 @@ export default {
     this.setUserId(this.userId)
   },
   components: {
-    FormCheckout, Loading
+    FormCheckout, Loading, 
+    'styled-wrapper': Styles,
   }
 }
 </script>
@@ -169,13 +174,12 @@ export default {
   box-shadow: 0px 0px 14px -6px #000000;
   background: #2D2D3C;
   flex-grow: 1;
-  color: #f7f7f7;
+
 }
 .title{
   margin-bottom: 30px;
   margin-left: 50px;
   margin-top: 20px;
-  color: #f7f7f7; 
 }
 
 </style>
